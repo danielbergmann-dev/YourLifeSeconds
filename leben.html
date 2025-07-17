@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeder Atemzug zählt: Deine Sekunden des Lebens</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Grundlegende Stile */
+      body {
+        font-family: "Montserrat", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: linear-gradient(
+          135deg,
+          #a1c4fd 0%,
+          #c2e9fb 100%
+        ); /* Sanfter, heller Blauverlauf */
+        color: #333;
+        text-align: center;
+        padding: 20px; /* Einheit für kleinere Bildschirme */
+        box-sizing: border-box;
+        overflow-x: hidden; /* Verhindert horizontales Scrollen */
+      }
+
+      .container {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        padding: 50px; /* Flexiblerer Padding für größere Bildschirme */
+        max-width: 900px;
+        width: 100%; /* Stellt sicher, dass der Container die volle Breite nutzt */
+        border-top: 8px solid #ffd700;
+        border-bottom: 8px solid #32cd32;
+        position: relative;
+      }
+
+      h1 {
+        font-family: "Poppins", sans-serif;
+        color: #2c3e50;
+        font-size: 3.5em; /* 'em' ist relativ zur Schriftgröße des Elternelements */
+        margin-bottom: 25px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      #countdown {
+        font-family: "Montserrat", sans-serif;
+        font-size: 6em;
+        color: #e74c3c;
+        margin: 40px 0;
+        font-weight: 700;
+        letter-spacing: -2px;
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+        word-break: break-all; /* Ermöglicht Umbruch bei sehr langen Zahlen auf kleinen Screens */
+      }
+
+      p {
+        font-size: 1.3em;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        color: #555;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      p strong {
+        color: #3498db;
+        font-weight: 700;
+      }
+
+      .footer {
+        margin-top: 50px;
+        font-size: 1em;
+        color: #777;
+        font-style: italic;
+      }
+
+      /* --- Media Queries für Responsivität --- */
+
+      /* Extra Small devices (e.g., old phones, very small screens) */
+      @media (max-width: 480px) {
+        body {
+          padding: 10px; /* Weniger Padding für sehr kleine Screens */
+        }
+        .container {
+          padding: 20px; /* Weniger Innenabstand */
+          border-radius: 15px;
+        }
+        h1 {
+          font-size: 1.8em; /* Kleinere Überschrift */
+        }
+        #countdown {
+          font-size: 3em; /* Kleinere Countdown-Zahl */
+          letter-spacing: normal; /* Normaler Abstand */
+        }
+        p {
+          font-size: 0.95em; /* Kleinere Textgröße */
+        }
+        .footer {
+          font-size: 0.8em;
+        }
+      }
+
+      /* Small devices (e.g., phones in portrait mode) */
+      @media (min-width: 481px) and (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+        .container {
+          padding: 30px;
+        }
+        h1 {
+          font-size: 2.5em;
+        }
+        #countdown {
+          font-size: 4.5em;
+        }
+        p {
+          font-size: 1.1em;
+        }
+      }
+
+      /* Medium devices (e.g., tablets in portrait mode, small laptops) */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .container {
+          padding: 40px;
+        }
+        h1 {
+          font-size: 3em;
+        }
+        #countdown {
+          font-size: 5em;
+        }
+        p {
+          font-size: 1.2em;
+        }
+      }
+
+      /* Large devices (e.g., desktops) - Grundstile reichen meist aus */
+      @media (min-width: 1025px) {
+        /* Hier können spezifische Anpassungen für sehr große Bildschirme erfolgen,
+               aber meist sind die Standardwerte optimal. */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Dein Tag. Deine Sekunden. Dein Leben.</h1>
+      <p>
+        Jeder neue Tag ist ein einzigartiges Geschenk, gefüllt mit
+        <strong>86.400 kostbaren Sekunden</strong>. Es ist deine Zeit, dein
+        Potenzial, dein Moment – um zu strahlen, zu lernen und zu wachsen.
+      </p>
+
+      <div id="countdown"></div>
+
+      <p>
+        Nutze sie bewusst für das, was dich wirklich erfüllt: Freude, Liebe,
+        Kreativität, und all die kleinen Momente des Glücks. Befreie dich von
+        dem, was du nicht ändern kannst, und konzentriere dich auf das, was dich
+        stärker macht.
+      </p>
+    </div>
+    <div class="footer">
+      Dein Tag. Deine Sekunden. Dein Leben. Gerne teilen! (c) Daniel Bergmann
+    </div>
+
+    <script>
+      const countdownElement = document.getElementById("countdown");
+      const totalSecondsInDay = 86400; // 24 Stunden * 60 Minuten * 60 Sekunden
+
+      function updateCountdown() {
+        const now = new Date();
+        const midnight = new Date(now);
+        midnight.setHours(0, 0, 0, 0); // Setzt die Zeit auf den Beginn des aktuellen Tages (Mitternacht)
+
+        const secondsSinceMidnight = Math.floor((now - midnight) / 1000);
+        const remainingSeconds = totalSecondsInDay - secondsSinceMidnight;
+
+        // Stellt sicher, dass der Zähler nicht negativ wird
+        countdownElement.textContent = Math.max(0, remainingSeconds);
+      }
+
+      // Countdown sofort beim Laden der Seite aktualisieren
+      updateCountdown();
+
+      // Countdown jede Sekunde aktualisieren
+      setInterval(updateCountdown, 1000);
+
+      // Um den Zähler um 0:00 Uhr exakt neu zu starten:
+      function scheduleMidnightReset() {
+        const now = new Date();
+        const tomorrowMidnight = new Date(now);
+        tomorrowMidnight.setDate(now.getDate() + 1);
+        tomorrowMidnight.setHours(0, 0, 0, 0);
+
+        const msUntilMidnight = tomorrowMidnight - now;
+
+        setTimeout(() => {
+          updateCountdown(); // Aktualisiert den Zähler sofort auf 86400
+          // Da setInterval bereits läuft, muss es nicht neu gestartet werden.
+          // Es ist wichtig, dass updateCountdown die Basis (Mitternacht) jedes Mal neu berechnet.
+          scheduleMidnightReset(); // Plant den nächsten Reset für den nächsten Tag
+        }, msUntilMidnight + 500); // Eine kleine Pufferzeit von 500ms, um sicherzustellen, dass Mitternacht überschritten ist
+      }
+
+      scheduleMidnightReset(); // Plant den ersten Reset für die kommende Mitternacht
+    </script>
+  </body>
+</html>
